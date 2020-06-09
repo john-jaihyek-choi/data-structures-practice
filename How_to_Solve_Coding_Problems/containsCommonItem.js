@@ -61,8 +61,10 @@ containCommonItem(['a', 'b', 'c', 'd'], ['z', 'x', 'a', 'o'])
 
 function containCommonItem (array1, array2) { // time O(n) / space O(n) complexity 
     const hashObj = {}; // O(1) / O(1)
-    for(let char of array1) { 
-        hashObj[char] = true; // O(n) / O(n)
+    for(let char of array1) {
+        if(char) {
+            hashObj[char] = true; // O(n) / O(n)
+        }
     }
     for(let char of array2) {
         if(hashObj[char]) return true; // O(n) / O(1);
