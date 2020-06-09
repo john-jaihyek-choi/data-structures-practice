@@ -24,11 +24,48 @@
                 // if true, return true;
     // return false;
 
-function containCommonItem (array1, array2) {
-    for(let i = 0; i < array1.length; i++) {
+function containCommonItem (array1, array2) { // time / space complexity
+    for(let i = 0; i < array1.length; i++) { 
         for(let j = 0; j < array2.length; j++) {
-            if(array1[i] === array2[j]) return true;
+            if(array1[i] === array2[j]) return true; // O(n) * O(n) = O(n^2) / O(1);
         }
+    }
+    return false;
+}
+
+containCommonItem(['a', 'b', 'c', 'd'], ['z', 'x', 'y', 'o'])
+containCommonItem(['a', 'b', 'c', 'd'], ['z', 'x', 'a', 'o'])
+
+
+// Hashtable == Object solution
+// create a loop that iterates the first array and makes an object key with value at each iteration
+// set another loop that iterates the second array and on each iteration check if stored Object has a valid key equal to the value of current iteration
+
+// Example: 
+// const hashObj = {
+        // 'a': null;
+        // 'b': null;
+        // 'c': null;
+// }
+
+// array2 will be looped and check if the hashObj
+
+// Pseudocode:
+// declare a function called containCommonItem with 2 parameters, array1 and array2;
+    // instantiate a variable called hashObj with an initial value of empty object;
+    // loop through the first array (array1) and set value of each iteration to the hashObj as a key
+    // loop through the second array (array2)
+        // set a condition to check if value of i'th index at each iteration is a valid key in hashObj
+            // if true, return true
+    // return false;
+
+function containCommonItem (array1, array2) { // time O(n) / space O(n) complexity 
+    const hashObj = {}; // O(1) / O(1)
+    for(let char of array1) { 
+        hashObj[char] = true; // O(n) / O(n)
+    }
+    for(let char of array2) {
+        if(hashObj[char]) return true; // O(n) / O(1);
     }
     return false;
 }
