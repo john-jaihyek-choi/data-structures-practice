@@ -1,12 +1,17 @@
 function mergeSortedArrays(arr1, arr2) {
+    const mergedArr = [];
+    if(arr1.length === 0 && arr2.length === 0) return mergedArr;
+    if(arr1.length === 0) return arr2;
+    if(arr2.length === 0) return arr1; 
+
     let i = 0;
     let j = 0;
-    const mergedArr = [];
+
     while(arr1[i] || arr2[j]) {
         if(arr1[i] <= arr2[j]) {
-            mergedArr.push(arr1[i++]);
+            mergedArr.push(arr1[i++]); // O(n) / O(n)
         } else {
-            mergedArr.push(arr2[j++] || arr1[i++]);
+            mergedArr.push(arr2[j++] || arr1[i++]); // O(n) / O(n)
         }
     }
     return mergedArr;
