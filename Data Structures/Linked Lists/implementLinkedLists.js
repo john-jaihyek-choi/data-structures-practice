@@ -77,6 +77,7 @@ class LinkedList {
         }
         const leadNode = this.traverse(index);
         leadNode.next = leadNode.next.next;
+        this.length--;
         return this;
     }
 
