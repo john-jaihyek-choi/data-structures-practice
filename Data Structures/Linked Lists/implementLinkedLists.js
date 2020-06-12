@@ -51,16 +51,41 @@ class LinkedList {
     insert(index, value) {
         if(index >= this.length) return this.append(value);
         if(index <= 0) return this.prepend(value);
+
         const newNode = new Node(value);
-        let prevNode = this.head
-        for(let i = 0; i < index - 1; i++) {
-            prevNode = prevNode.next;
-        }
-        const targetNode = prevNode.next
+        const leadNode = this.traverse(index);
+        const targetNode = leadNode.next
+
         newNode.next = targetNode;
-        prevNode.next = newNode;
+        leadNode.next = newNode;
+
         this.length++;
         return this;
+    }
+
+    remove(index) {
+        if(index == undefined) return
+        if(index <= 0) {
+            this.head = this.head.next;
+            this.length--;
+            return
+        }
+        if(index >= this.length) {
+            this.traverse(this.length-1).next = null;
+            this.length--;
+            return
+        }
+        const leadNode = this.traverse(index);
+        leadNode.next = leadNode.next.next;
+        return this;
+    }
+
+    traverse(index) {
+        let leadNode = this.head
+        for(let i = 0; i < index - 1; i++) {
+            leadNode = leadNode.next;
+        }
+        return leadNode;
     }
 
     printList() {
@@ -70,7 +95,7 @@ class LinkedList {
             arr.push(curr.value);
             curr = curr.next;
         }
-        return arr;
+        console.log('length ', this.length, 'arr', arr);
     }
 }
 
@@ -82,4 +107,5 @@ console.log(newList.append(8))
 console.log(newList.prepend(1))
 console.log(newList.prepend(7))
 console.log(newList.insert(2,23))
+console.log(newList.remove(3));
 console.log(newList.printList());
