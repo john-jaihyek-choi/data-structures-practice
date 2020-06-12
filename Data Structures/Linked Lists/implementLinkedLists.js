@@ -15,7 +15,7 @@ let linkedLists = {
 }
 
 // proper way of implementing Linked Lists
-class NewNode {
+class Node {
     constructor(value) {
         this.value = value,
         this.next = null
@@ -33,7 +33,7 @@ class LinkedList {
     }
 
     append(value) {
-        const newNode = new NewNode(value);
+        const newNode = new Node(value);
         this.tail.next = newNode; // setting the current head.next = newNode
         this.tail = newNode; // setting a new tail to the node we made above in line 29
         this.length++;
@@ -41,11 +41,36 @@ class LinkedList {
     }
 
     prepend(value) {
-        const newNode = new NewNode(value);
+        const newNode = new Node(value);
         newNode.next = this.head;
         this.head = newNode;
         this.length++;
         return this;
+    }
+
+    insert(index, value) {
+        if(index >= this.length) return this.append(value);
+        if(index <= 0) return this.prepend(value);
+        const newNode = new Node(value);
+        let prevNode = this.head
+        for(let i = 0; i < index - 1; i++) {
+            prevNode = prevNode.next;
+        }
+        const targetNode = prevNode.next
+        newNode.next = targetNode;
+        prevNode.next = newNode;
+        this.length++;
+        return this;
+    }
+
+    printList() {
+        const arr = [];
+        let curr = this.head
+        while(curr) {
+            arr.push(curr.value);
+            curr = curr.next;
+        }
+        return arr;
     }
 }
 
@@ -56,4 +81,5 @@ console.log(newList.append(5))
 console.log(newList.append(8))
 console.log(newList.prepend(1))
 console.log(newList.prepend(7))
-console.log(newList);
+console.log(newList.insert(2,23))
+console.log(newList.printList());
