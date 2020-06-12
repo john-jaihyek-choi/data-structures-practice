@@ -26,11 +26,21 @@ class LinkedList {
     }
 
     append(value) {
-        this.head.next = {
+        const newNode = {
             value: value,
             next: null
         }
-        this.tail = this.head.next
+        this.tail.next = newNode; // setting the current head.next = newNode
+        this.tail = newNode; // setting a new tail to the node we made above in line 29
+        this.length++;
+    }
+
+    prepend(value) {
+        const newNode = {
+            value: value,
+            next: this.head
+        }
+        this.head = newNode;
         this.length++;
     }
 }
@@ -39,4 +49,7 @@ const newList = new LinkedList(10)
 
 
 console.log(newList.append(5))
+console.log(newList.append(8))
+console.log(newList.prepend(1))
+console.log(newList.prepend(7))
 console.log(newList);
