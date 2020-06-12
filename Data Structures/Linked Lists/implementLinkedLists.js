@@ -15,6 +15,13 @@ let linkedLists = {
 }
 
 // proper way of implementing Linked Lists
+class NewNode {
+    constructor(value) {
+        this.value = value,
+        this.next = null
+    }
+}
+
 class LinkedList {
     constructor(value) {
         this.head = {
@@ -26,22 +33,19 @@ class LinkedList {
     }
 
     append(value) {
-        const newNode = {
-            value: value,
-            next: null
-        }
+        const newNode = new NewNode(value);
         this.tail.next = newNode; // setting the current head.next = newNode
         this.tail = newNode; // setting a new tail to the node we made above in line 29
         this.length++;
+        return this;
     }
 
     prepend(value) {
-        const newNode = {
-            value: value,
-            next: this.head
-        }
+        const newNode = new NewNode(value);
+        newNode.next = this.head;
         this.head = newNode;
         this.length++;
+        return this;
     }
 }
 
