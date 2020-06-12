@@ -34,10 +34,11 @@ class LinkedList {
 
     append(value) {
         const newNode = new Node(value);
+        if(!this.tail) this.tail = newNode;
         this.tail.next = newNode; // setting the current head.next = newNode
         this.tail = newNode; // setting a new tail to the node we made above in line 29
         this.length++;
-        return this;
+        return this.printList();
     }
 
     prepend(value) {
@@ -45,7 +46,7 @@ class LinkedList {
         newNode.next = this.head;
         this.head = newNode;
         this.length++;
-        return this;
+        return this.printList();
     }
 
     insert(index, value) {
@@ -60,25 +61,27 @@ class LinkedList {
         leadNode.next = newNode;
 
         this.length++;
-        return this;
+        return this.printList();
     }
 
     remove(index) {
-        if(index == undefined) return
+        if(this.length <= 1) return console.log("There are no valid tails");
+        if(index === undefined) return;
         if(index <= 0) {
             this.head = this.head.next;
             this.length--;
             return
         }
         if(index >= this.length) {
-            this.traverse(this.length-1).next = null;
-            this.length--;
+            this.remove(this.length-1);
             return
         }
         const leadNode = this.traverse(index);
-        leadNode.next = leadNode.next.next;
+        const deleteNode = leadNode.next
+        leadNode.next = deleteNode.next;
+        this.tail = this.traverse(this.length-1);
         this.length--;
-        return this;
+        return this.printList();
     }
 
     traverse(index) {
@@ -96,17 +99,9 @@ class LinkedList {
             arr.push(curr.value);
             curr = curr.next;
         }
-        console.log('length ', this.length, 'arr', arr);
+        console.log('length ', this.length, 'arr', arr, 'node', this);
     }
 }
 
 const newList = new LinkedList(10)
 
-
-console.log(newList.append(5))
-console.log(newList.append(8))
-console.log(newList.prepend(1))
-console.log(newList.prepend(7))
-console.log(newList.insert(2,23))
-console.log(newList.remove(3));
-console.log(newList.printList());
