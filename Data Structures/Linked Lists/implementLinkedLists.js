@@ -126,7 +126,8 @@ const newList = new LinkedList(10)
 class Node {
     constructor(value){
       this.value = value,
-      this.next = null
+      this.next = null,
+      this.prev = null
     }
   }
   
@@ -134,7 +135,8 @@ class Node {
     constructor(value){
       this.head = {
         value: value,
-        next: null
+        next: null,
+        prev: null
       }
       this.tail = this.head;
       this.length = 1;
@@ -142,7 +144,7 @@ class Node {
   
     append(value) {
       const newItem = new Node(value);
-      this.head.next = newItem;
+      this.tail.next = newItem;
       this.tail = newItem;
       this.length++;
       return this.print();
