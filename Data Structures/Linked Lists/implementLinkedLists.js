@@ -121,3 +121,99 @@ class LinkedList {
 
 const newList = new LinkedList(10)
 
+// Clean implementation of Linked List without input check:
+
+class Node {
+    constructor(value){
+      this.value = value,
+      this.next = null
+    }
+  }
+  
+  class LinkedList {
+    constructor(value){
+      this.head = {
+        value: value,
+        next: null
+      }
+      this.tail = this.head;
+      this.length = 1;
+    }
+  
+    append(value) {
+      const newItem = new Node(value);
+      this.head.next = newItem;
+      this.tail = newItem;
+      this.length++;
+      return this.print();
+    }
+  
+    prepend(value) {
+      const newItem = new Node(value);
+      newItem.next = this.head;
+      this.head = newItem;
+      this.length++;
+      return this.print();
+    }
+  
+    insert(index, value) {
+      const newItem = new Node(value);
+      const targetNode = this.traverse(index);
+      const leadNode = targetNode.next;
+      newItem.next = leadNode;
+      targetNode.next = newItem;
+      this.length++;
+      return this.print()
+    }
+  
+    remove(index) {
+      const targetNode = this.traverse(index);
+      const leadNode = targetNode.next;
+      targetNode.next = leadNode.next;
+      this.length--;
+      return this.print();
+    }
+  
+    traverse(index) {
+      let targetNode = this.head
+      for(let i = 0; i < index-1; i++) {
+        targetNode = targetNode.next;
+      }
+      return targetNode;
+    }
+  
+    reverse() {
+      let first = this.head;
+      let second = this.head.next;
+      this.tail = this.head;
+      while(second) {
+        const third = second.next;
+        second.next = first;
+        first = second;
+        second = third;
+      }
+      this.head = first;
+      return this.print();
+    }
+  
+    print() {
+      const list = [];
+      let curr = this.head;
+      for(let i = 0; i < this.length; i++) {
+        list.push(curr.value);
+        curr = curr.next;
+      }
+      return list;
+    }
+  }
+  
+  const newList = new LinkedList(1);
+  
+  
+  console.log(newList.append(2))
+  console.log(newList.prepend(0))
+  console.log(newList.insert(1,8))
+  console.log(newList.insert(3,19))
+  console.log(newList.remove(1))
+  console.log(newList.reverse());
+  console.log(newList);
