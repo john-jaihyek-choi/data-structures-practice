@@ -92,6 +92,22 @@ class LinkedList {
         return leadNode;
     }
 
+    reverse() {
+        if(!this.head.next) return this.head;
+        this.tail = this.head; // flip tail to head
+        let first = this.head; // store head as the first value (if provided [10,5,6,7]) first will be 10
+        let second = first.next; // store head.next as the second value (second will be 5)
+        while(second) {
+          const third = second.next; // store head.next.next as a third value (third will be 6)
+          second.next = first;  // set third to the first value (setting 5.next to 10 this will make [10 <- 5 <- 6 -> 7])
+          first = second; // set first to second (moving first value to 5 from 10)
+          second = third; // set second to a new third value (moving second value to 6 from 5)
+        }
+        this.head.next = null;
+        this.head = first;
+        return this.printList();
+      }
+
     printList() {
         const arr = [];
         let curr = this.head
