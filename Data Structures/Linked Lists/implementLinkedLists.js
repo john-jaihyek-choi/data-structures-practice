@@ -92,6 +92,22 @@ class LinkedList {
         return leadNode;
     }
 
+    reverse() {
+        if(!this.head.next) return this.head;
+        this.tail = this.head; // flip tail to head
+        let first = this.head; // store head as the first value (if provided [10,5,6,7]) first will be 10
+        let second = first.next; // store head.next as the second value (second will be 5)
+        while(second) {
+          const third = second.next; // store head.next.next as a third value (third will be 6)
+          second.next = first;  // set third to the first value (setting 5.next to 10 this will make [10 <- 5 <- 6 -> 7])
+          first = second; // set first to second (moving first value to 5 from 10)
+          second = third; // set second to a new third value (moving second value to 6 from 5)
+        }
+        this.head.next = null;
+        this.head = first;
+        return this.printList();
+      }
+
     printList() {
         const arr = [];
         let curr = this.head
@@ -105,3 +121,99 @@ class LinkedList {
 
 const newList = new LinkedList(10)
 
+// Clean implementation of Linked List without input check:
+
+class Node {
+    constructor(value){
+      this.value = value,
+      this.next = null
+    }
+  }
+  
+  class LinkedList {
+    constructor(value){
+      this.head = {
+        value: value,
+        next: null
+      }
+      this.tail = this.head;
+      this.length = 1;
+    }
+  
+    append(value) {
+      const newItem = new Node(value);
+      this.head.next = newItem;
+      this.tail = newItem;
+      this.length++;
+      return this.print();
+    }
+  
+    prepend(value) {
+      const newItem = new Node(value);
+      newItem.next = this.head;
+      this.head = newItem;
+      this.length++;
+      return this.print();
+    }
+  
+    insert(index, value) {
+      const newItem = new Node(value);
+      const targetNode = this.traverse(index);
+      const leadNode = targetNode.next;
+      newItem.next = leadNode;
+      targetNode.next = newItem;
+      this.length++;
+      return this.print()
+    }
+  
+    remove(index) {
+      const targetNode = this.traverse(index);
+      const leadNode = targetNode.next;
+      targetNode.next = leadNode.next;
+      this.length--;
+      return this.print();
+    }
+  
+    traverse(index) {
+      let targetNode = this.head
+      for(let i = 0; i < index-1; i++) {
+        targetNode = targetNode.next;
+      }
+      return targetNode;
+    }
+  
+    reverse() {
+      let first = this.head;
+      let second = this.head.next;
+      this.tail = this.head;
+      while(second) {
+        const third = second.next;
+        second.next = first;
+        first = second;
+        second = third;
+      }
+      this.head = first;
+      return this.print();
+    }
+  
+    print() {
+      const list = [];
+      let curr = this.head;
+      for(let i = 0; i < this.length; i++) {
+        list.push(curr.value);
+        curr = curr.next;
+      }
+      return list;
+    }
+  }
+  
+  const newList = new LinkedList(1);
+  
+  
+  console.log(newList.append(2))
+  console.log(newList.prepend(0))
+  console.log(newList.insert(1,8))
+  console.log(newList.insert(3,19))
+  console.log(newList.remove(1))
+  console.log(newList.reverse());
+  console.log(newList);
