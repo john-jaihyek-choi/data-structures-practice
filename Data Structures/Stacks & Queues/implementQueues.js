@@ -25,9 +25,8 @@ class myQueue {
             this.last = newItem;
             this.first = this.last;
         } else {
-            const temp = this.last;
+            this.last.next = newItem;
             this.last = newItem;
-            this.last.next = temp;
         }
         this.length++;
         return this;
