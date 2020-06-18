@@ -4,7 +4,7 @@
 class Node {
     constructor(value) {
         this.value = value;
-        this.next = null;
+        this.next = null; // next = the next one in line NOT the one infront of the current node
     }
 }
 
