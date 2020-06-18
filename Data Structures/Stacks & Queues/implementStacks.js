@@ -34,7 +34,9 @@ class myStack {
     }
 
     pop() {
+        if(this.length === 1) this.bottom = null;
         this.top = this.top.next;
+        this.length--;
         return this;
     }
 }
