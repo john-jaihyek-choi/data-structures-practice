@@ -1,6 +1,7 @@
 // LIFO/FILO
 // Can be implmented with Arrays and Linked Lists
 
+// Using Linked Lists
 class Node {
     constructor(value) {
         this.value = value;
@@ -48,3 +49,26 @@ const newStack = new myStack();
 console.log(newStack.peek());
 console.log(newStack.push(1));
 console.log(newStack.peek());
+
+
+// Using Arrays
+class myStack {
+    constructor() {
+        this.list = [];
+    }
+
+    peek() {
+        return this.list[this.list.length-1];
+    }
+
+    push(value) {
+        this.list.push(value);
+        return this
+    }
+
+    pop() {
+        if(this.list.length === 0) return this;
+        this.list.pop();
+        return this
+    }
+}
