@@ -58,6 +58,7 @@ class myStack {
     }
 
     peek() {
+        if(this.list.length === 0) return null;
         return this.list[this.list.length-1];
     }
 
