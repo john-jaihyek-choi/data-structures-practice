@@ -34,7 +34,8 @@ class myStack {
     }
 
     pop() {
-        
+        this.top = this.top.next;
+        return this;
     }
 }
 
