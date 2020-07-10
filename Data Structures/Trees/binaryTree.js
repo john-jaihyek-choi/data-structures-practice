@@ -34,6 +34,7 @@ class Node {
     }
     lookup(value){
       let currentNode = this.root;
+      if(!this.root) return null;
       while(currentNode) {
         if(currentNode.value === value) return currentNode;
         if(value < currentNode.value) {
@@ -45,7 +46,9 @@ class Node {
       return null;
     }
     remove(value) {
-      
+      const toDelete = this.lookup(value);
+      if(!toDelete) return null;
+      return toDelete;
     }
   }
   
